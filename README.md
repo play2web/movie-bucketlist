@@ -7,3 +7,30 @@ App functions:
 - A watchlist overview
 - Add movies or tv shows to your watchlist
 - See the rating of the movies or tv-shows
+
+## Instructions
+
+Change the directory.
+```bash
+cd into the project directory.
+```
+
+For the **back-end**, install the dependencies once via the terminal.
+```bash
+npm install
+```
+
+Runs the app in the development mode.
+```bash
+npm start
+```
+
+Run the *development server* for React.
+```bash
+REACT_APP_API_URL= http://localhost:3000
+```
+
+To make a production build, simply run on *react-src* folder via the terminal.
+```bash
+npm run build
+```
