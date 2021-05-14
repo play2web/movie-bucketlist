@@ -36,6 +36,8 @@ export class Header extends React.Component {
 	
 	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div>X No matching results!</div>;
 
+	hideResults = () => document.documentElement.addEventListener('click', ()=> this.state.queryWord.length && this.setState({queryWord:''}))
+
 	render () {
 		return (
 			<header>
@@ -44,6 +46,7 @@ export class Header extends React.Component {
 					<input type='text' placeholder='Search' value={this.state.queryWord} onChange={this.searching}/>
 					<ul>
 						{this.state.queryWord.length>=3 && this.showMatchingResults()}
+						{this.hideResults()}
 					</ul>
 				</div>
 			</header>
