@@ -1,27 +1,7 @@
 import React, {setState} from 'react';
 import uuid from 'react-uuid';
 
-const movieList = [{
-		name: 'Star Wars',
-		id: 22
-	},
-	{
-		name: 'Titanic',
-		id: 2732
-	},
-	{
-		name: 'Home Alone',
-		id: 25
-	},
-	{
-		name: 'Girl from train',
-		id: 2222
-	},
-	{
-		name: 'Gone Girl',
-		id:3745
-	},
-];
+import { apiUrl } from '../../databases';
 
 export class Header extends React.Component {
 	constructor (props) {
@@ -36,28 +16,26 @@ export class Header extends React.Component {
 		this.setState({
 			queryWord: e.target.value,
 		}, this.fetchResults);
-	
 	}
 
 	fetchResults = () => {
 		if (this.state.queryWord.length>=3) {
-			//this part will be changed after we add API to our application
-			this.setState({
-				matchMovies:movieList.filter(movie => movie.name.toLowerCase().indexOf(this.state.queryWord.toLowerCase())>-1),
-			})
+			fetch(`${apiUrl}s=${this.state.queryWord}`)
+			.then(data => data.json())
+			.then(results => results.Search ? this.setState({matchMovies: results.Search}) : this.setState({matchMovies: []}))
 		}
 	}
 
 	displayMovie = (movie) => {
-		if(this.props.movieList.some(movieInList => movieInList.name===movie.name)) {
-			return <li key={uuid()}>{movie.name}</li>
+		if(this.props.movieList.some(movieInList => movieInList.Title===movie.Title)) {
+			return <li key={uuid()}>{movie.Title}</li>
 		} else {
-			return <li key={uuid()}>{movie.name} <img src='http://placehold.jp/20x20.png' alt='plus' onClick={() => this.setState({queryWord:''}, this.props.toWatch(movie))}/></li>
+			return <li key={uuid()}>{movie.Title} <img src='http://placehold.jp/20x20.png' alt='plus' onClick={() => this.setState({queryWord:''}, this.props.toWatch(movie))}/></li>
 		}
 	}
 	
 
-	showMatchingResults = () => this.state.queryWord.length>=3 ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : null;
+	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div>X No matching results!</div>;
 
 	render () {
 		return (
@@ -66,7 +44,7 @@ export class Header extends React.Component {
 				<div className='search'>
 					<input type='text' placeholder='Search' value={this.state.queryWord} onChange={this.searching}/>
 					<ul>
-						{this.showMatchingResults()}
+						{this.state.queryWord.length>=3 && this.showMatchingResults()}
 					</ul>
 				</div>
 			</header>
