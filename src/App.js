@@ -3,6 +3,7 @@ import './App.css';
 import { firebaseUrl } from './databases';
 import { apiUrl }  from './databases';
 import {Header} from './components/Header/Header';
+import { Movies } from './components/Movies/Movies';
 
 class App extends React.Component {
   constructor () {
@@ -18,7 +19,7 @@ class App extends React.Component {
     .then(result => {
       fetch(`${firebaseUrl}.json`, {
         method:'POST',
-        body:JSON.stringify({...result, watched:false})
+        body:JSON.stringify({...result, imdbID: movie.imdbID, watched:false})
       })
       .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
     })
@@ -36,6 +37,38 @@ class App extends React.Component {
     })
   }
 
+  hide = (id) => {
+    const whatchedMovie = this.state.movieList.find(movie => movie.id===id);
+    whatchedMovie.watched = true;
+    fetch(`${firebaseUrl}${id}.json`, {
+      method:'PATCH',
+      body:JSON.stringify(whatchedMovie)
+    })
+    .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
+  }
+
+  remove = (id) => {
+    const removeMovie = this.state.movieList.find(movie => movie.id===id);
+    fetch(`${firebaseUrl}${id}.json`, {
+      method:'DELETE',
+      body:JSON.stringify(removeMovie)
+    })
+    .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
+  }
+
+  move = (position, id) => {
+    const moveMovie = this.state.movieList.find(movie => movie.id===id);
+    const indexOfMoveMovie = this.state.movieList.indexOf(moveMovie);
+    
+    if(position==='up' && indexOfMoveMovie!==0) {
+      this.state.movieList.splice(indexOfMoveMovie,1);
+      this.state.movieList.splice(indexOfMoveMovie-1, 0, moveMovie);
+    } else if (position==='down' && indexOfMoveMovie!==this.state.movieList.length-1) {
+      this.state.movieList.splice(indexOfMoveMovie,1);
+      this.state.movieList.splice(indexOfMoveMovie+1, 0, moveMovie);
+    } 
+    this.setState({movieList:this.state.movieList})
+  }
 
   componentDidMount() {
     this.getResults();
@@ -43,7 +76,11 @@ class App extends React.Component {
 
   render () {
     return (
-      <Header toWatch={this.toWatch} movieList={this.state.movieList}/>
+      <>
+        <Header toWatch={this.toWatch} movieList={this.state.movieList}/>
+        <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move}/>
+        <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move}/>
+      </>
     )
   }
 }
