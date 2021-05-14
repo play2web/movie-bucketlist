@@ -12,11 +12,7 @@ export class Header extends React.Component {
 		}
 	}
 
-	searching = e => {
-		this.setState({
-			queryWord: e.target.value,
-		}, this.fetchResults);
-	}
+	searching = e => this.setState({queryWord: e.target.value}, this.fetchResults);
 
 	fetchResults = () => {
 		if (this.state.queryWord.length>=3) {

@@ -39,35 +39,35 @@ class App extends React.Component {
   }
 
   hide = (id) => {
-    const whatchedMovie = this.state.movieList.find(movie => movie.id===id);
-    whatchedMovie.watched = true;
+    const movie = this.state.movieList.find(movie => movie.id===id);
+    movie.watched = true;
     fetch(`${firebaseUrl}${id}.json`, {
       method:'PATCH',
-      body:JSON.stringify(whatchedMovie)
+      body:JSON.stringify(movie)
     })
     .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
   }
 
   remove = (id) => {
-    const removeMovie = this.state.movieList.find(movie => movie.id===id);
+    const movie = this.state.movieList.find(movie => movie.id===id);
     fetch(`${firebaseUrl}${id}.json`, {
       method:'DELETE',
-      body:JSON.stringify(removeMovie)
+      body:JSON.stringify(movie)
     })
     .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
   }
 
   move = (position, id) => {
-    const moveMovie = this.state.movieList.find(movie => movie.id===id);
-    const indexOfMoveMovie = this.state.movieList.indexOf(moveMovie);
+    const movie = this.state.movieList.find(movie => movie.id===id);
+    const indexOfMoveMovie = this.state.movieList.indexOf(movie);
     
     if(position==='up' && indexOfMoveMovie!==0) {
       this.state.movieList.splice(indexOfMoveMovie,1);
-      this.state.movieList.splice(indexOfMoveMovie-1, 0, moveMovie);
+      this.state.movieList.splice(indexOfMoveMovie-1, 0, movie);
       this.setState({movieList:this.state.movieList})
     } else if (position==='down' && indexOfMoveMovie!==this.state.movieList.length-1) {
       this.state.movieList.splice(indexOfMoveMovie,1);
-      this.state.movieList.splice(indexOfMoveMovie+1, 0, moveMovie);
+      this.state.movieList.splice(indexOfMoveMovie+1, 0, movie);
       this.setState({movieList:this.state.movieList})
     } 
   }
