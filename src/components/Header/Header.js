@@ -1,6 +1,6 @@
-import React, {setState} from 'react';
+import React from 'react';
 import uuid from 'react-uuid';
-
+import './Header.css';
 import { apiUrl } from '../../databases';
 
 export class Header extends React.Component {
@@ -34,7 +34,6 @@ export class Header extends React.Component {
 		}
 	}
 	
-
 	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div>X No matching results!</div>;
 
 	render () {

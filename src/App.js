@@ -36,6 +36,11 @@ class App extends React.Component {
     })
   }
 
+
+  componentDidMount() {
+    this.getResults();
+  }
+
   render () {
     return (
       <Header toWatch={this.toWatch} movieList={this.state.movieList}/>
