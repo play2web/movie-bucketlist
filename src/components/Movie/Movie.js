@@ -8,7 +8,7 @@ export const Movie = (props) => {
 
 	React.useEffect(()=>{
 		setGenres(props.genre.split(', '));
-	},[])
+	},[props.genre])
 
 	return (
 		<li>

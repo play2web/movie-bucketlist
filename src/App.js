@@ -10,6 +10,7 @@ class App extends React.Component {
     super();
     this.state={
       movieList:[],
+      filters:[],
     }
   }
 
@@ -33,7 +34,7 @@ class App extends React.Component {
       for(const result in results) {
         resultTransformed.unshift({...results[result], id:result})
       }
-      this.setState({movieList: resultTransformed});
+      this.setState({movieList: resultTransformed, filters:[]});
     })
   }
 
@@ -75,7 +76,7 @@ class App extends React.Component {
     if(!whached) {
       let filteredMovies = this.state.movieList.filter(movie=>movie.watched)
       filteredMovies.push( ...this.state.movieList.filter(movie=>!movie.watched && movie.Genre.includes(genre.genre)))
-      this.setState({movieList: filteredMovies});
+      this.setState({movieList: filteredMovies,filters:[...this.state.filters, genre.genre]});
     }
   }
 
@@ -87,8 +88,8 @@ class App extends React.Component {
     return (
       <>
         <Header toWatch={this.toWatch} movieList={this.state.movieList}/>
-        <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} reset={this.getResults}/>
-        <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} reset={this.getResults}/>
+        <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults}/>
+        <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults}/>
       </>
     )
   }
