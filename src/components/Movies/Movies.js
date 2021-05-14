@@ -8,7 +8,7 @@ export const Movies = (props) => {
 
 	const showMovies = (watched) => {
 		const filtered = props.movieList.filter(movie => movie.watched===watched);
-		return filtered.length ? filtered.map(movie => <Movie key={uuid()} id={movie.id} title={movie.Title} genre={movie.Genre} rating={movie.imdbRating} watched={props.watched} hide={props.hide} remove={props.remove} move={props.move} filter={props.filter}/>) : <li>The list is empty</li>
+		return filtered.length ? filtered.map(movie => <Movie key={uuid()} movie={movie} watched={props.watched} hide={props.hide} remove={props.remove} move={props.move} filter={props.filter}/>) : <li>The list is empty</li>
 	}
 
 	return (
