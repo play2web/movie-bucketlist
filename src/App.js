@@ -63,11 +63,20 @@ class App extends React.Component {
     if(position==='up' && indexOfMoveMovie!==0) {
       this.state.movieList.splice(indexOfMoveMovie,1);
       this.state.movieList.splice(indexOfMoveMovie-1, 0, moveMovie);
+      this.setState({movieList:this.state.movieList})
     } else if (position==='down' && indexOfMoveMovie!==this.state.movieList.length-1) {
       this.state.movieList.splice(indexOfMoveMovie,1);
       this.state.movieList.splice(indexOfMoveMovie+1, 0, moveMovie);
+      this.setState({movieList:this.state.movieList})
     } 
-    this.setState({movieList:this.state.movieList})
+  }
+
+  filter = (genre, whached) => {
+    if(!whached) {
+      let filteredMovies = this.state.movieList.filter(movie=>movie.watched)
+      filteredMovies.push( ...this.state.movieList.filter(movie=>!movie.watched && movie.Genre.includes(genre.genre)))
+      this.setState({movieList: filteredMovies});
+    }
   }
 
   componentDidMount() {
@@ -78,8 +87,8 @@ class App extends React.Component {
     return (
       <>
         <Header toWatch={this.toWatch} movieList={this.state.movieList}/>
-        <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move}/>
-        <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move}/>
+        <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} reset={this.getResults}/>
+        <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} reset={this.getResults}/>
       </>
     )
   }
