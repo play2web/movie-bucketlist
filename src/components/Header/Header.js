@@ -27,7 +27,7 @@ export class Header extends React.Component {
 	}
 
 	displayMovie = (movie) => {
-		if(this.props.movieList.some(movieInList => movieInList.Title===movie.Title)) {
+		if(this.props.movieList.some(movieInList => movieInList.imdbID===movie.imdbID)) {
 			return <li key={uuid()}>{movie.Title}</li>
 		} else {
 			return <li key={uuid()}>{movie.Title} <img src='http://placehold.jp/20x20.png' alt='plus' onClick={() => this.setState({queryWord:''}, this.props.toWatch(movie))}/></li>
