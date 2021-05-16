@@ -4,7 +4,7 @@ import './Header.css';
 import { apiUrl } from '../../databases';
 
 export class Header extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super();
 		this.state = {
 			matchMovies: [],
@@ -12,39 +12,53 @@ export class Header extends React.Component {
 		}
 	}
 
-	searching = e => this.setState({queryWord: e.target.value}, this.fetchResults);
+	searching = e => this.setState({ queryWord: e.target.value }, this.fetchResults);
 
 	fetchResults = () => {
-		if (this.state.queryWord.length>=3) {
+		if (this.state.queryWord.length >= 3) {
 			fetch(`${apiUrl}s=${this.state.queryWord}`)
-			.then(data => data.json())
-			.then(results => results.Search ? this.setState({matchMovies: results.Search}) : this.setState({matchMovies: []}))
+				.then(data => data.json())
+				.then(results => results.Search ? this.setState({ matchMovies: results.Search }) : this.setState({ matchMovies: [] }))
 		}
 	}
 
 	displayMovie = (movie) => {
-		if(this.props.movieList.some(movieInList => movieInList.imdbID===movie.imdbID)) {
+		if (this.props.movieList.some(movieInList => movieInList.imdbID === movie.imdbID)) {
 			return <li key={uuid()}>{movie.Title}</li>
 		} else {
-			return <li key={uuid()}>{movie.Title} <img src='http://placehold.jp/20x20.png' alt='plus' onClick={() => this.setState({queryWord:''}, this.props.toWatch(movie))}/></li>
+			return <li key={uuid()}><span className="mt-5">{movie.Title}</span>  <i className="fa fa-plus" onClick={() => this.setState({ queryWord: '' }, this.props.toWatch(movie))}></i></li>
 		}
 	}
-	
+
 	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div>X No matching results!</div>;
 
-	hideResults = () => document.documentElement.addEventListener('click', ()=> this.state.queryWord.length && this.setState({queryWord:''}))
+	hideResults = () => document.documentElement.addEventListener('click', () => this.state.queryWord.length && this.setState({ queryWord: '' }))
 
-	render () {
+	render() {
 		return (
-			<header>
-				<h1>MovieBUCKETLIST</h1>
-				<div className='search'>
-					<input type='text' placeholder='Search' value={this.state.queryWord} onChange={this.searching}/>
-					<ul>
-						{this.state.queryWord.length>=3 && this.showMatchingResults()}
-						{this.hideResults()}
-					</ul>
-				</div>
+			<header className="section-header mb-5">
+				<section className="header-main border-bottom pb-3">
+					<div className="row align-items-center">
+						<div className="col-2">
+							<a href="#" className="brand-wrap" data-abc="true">
+								<img className="logo img-fluid" src="https://image.freepik.com/free-vector/click-movie-logo-vector_18099-258.jpg"></img>
+							</a> </div>
+						<div className="col-10">
+							<div className="input-group">
+								<input className="form-control border-right-0" placeholder="Search" value={this.state.queryWord} onChange={this.searching} />
+								<span className="input-group-append bg-white border-right-0">
+									<span className="input-group-text bg-transparent">
+										<i className="fa fa-search"></i>
+									</span>
+								</span>
+								<ul className="absolute-position list-unstyled">
+									{this.state.queryWord.length >= 3 && this.showMatchingResults()}
+									{this.hideResults()}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
 			</header>
 		)
 	}
