@@ -1,0 +1,14 @@
+.absolute-position {
+  margin-top: 40px;
+  width: 100%;
+  background: grey;
+  color: white;
+  max-height: 100px;
+  overflow-y: scroll;
+  position: absolute;
+  padding-left: 10px;
+}
+
+.absolute-position li{
+    margin-top: 5px;
+  }
