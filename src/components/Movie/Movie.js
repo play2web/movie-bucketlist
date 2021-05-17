@@ -21,7 +21,7 @@ export const Movie = (props) => {
 						</div>
 						<div className="col-10">
 							<div className="card-body p-3">
-								<Link to={`/movie-info/${props.movie.id}`} className="text-dark"><h4>{props.movie.Title}</h4></Link>
+								<Link to={`/${props.movie.id}`} className="text-dark"><h4>{props.movie.Title}</h4></Link>
 								<p className="text-muted small">{props.movie.Rating}</p>
 								<ul className="list-inline">
 									{genres.map(genre => <li className="list-inline-item" key={uuid()} onClick={() => props.filter({ genre }, props.watched)}>
@@ -30,9 +30,9 @@ export const Movie = (props) => {
 								</ul>
 								<div className="btn-group" role="group" aria-label="Basic example">
 									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.hide(props.movie.id)}><i className="fa fa-eye"></i></button>}
-									{props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.remove(props.movie.id)}><i className="fa fa-trash"></i></button>}
-									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('up', props.movie.id)}><i className="fa fa-arrow-up"></i></button>}
-									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('down', props.movie.id)}><i className="fa fa-arrow-down"></i></button>}
+									<button type="button" className="btn btn-secondary" onClick={() => props.remove(props.movie.id)}><i className="fa fa-trash"></i></button>
+									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('up', props.movie)}><i className="fa fa-arrow-up"></i></button>}
+									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('down', props.movie)}><i className="fa fa-arrow-down"></i></button>}
 								</div>
 							</div>
 						</div>

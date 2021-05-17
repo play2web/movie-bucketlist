@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import uuid from 'react-uuid';
 import { firebaseUrl } from './databases';
 import { apiUrl } from './databases';
 import { Header } from './components/Header/Header';
@@ -12,6 +13,8 @@ class App extends React.Component {
     super();
     this.state = {
       movieList: [],
+      toWatch:[],
+      watched:[],
       filters: [],
     }
   }
@@ -36,7 +39,9 @@ class App extends React.Component {
         for (const result in results) {
           resultTransformed.unshift({ ...results[result], id: result })
         }
-        this.setState({ movieList: resultTransformed, filters: [] });
+        const toWatch = resultTransformed.filter(movie => !movie.watched)
+        const watched = resultTransformed.filter(movie => movie.watched)
+        this.setState({ movieList: resultTransformed, toWatch: toWatch, watched: watched, filters: [] });
       })
   }
 
@@ -59,27 +64,25 @@ class App extends React.Component {
       .then(data => data.status === 200 ? this.getResults() : console.log('Something get wrong...'))
   }
 
-  move = (position, id) => {
-    const movie = this.state.movieList.find(movie => movie.id === id);
-    const indexOfMoveMovie = this.state.movieList.indexOf(movie);
+  move = (position, movie) => {
+    const indexOfMoveMovie = this.state.toWatch.indexOf(movie);
 
     if (position === 'up' && indexOfMoveMovie !== 0) {
-      this.state.movieList.splice(indexOfMoveMovie, 1);
-      this.state.movieList.splice(indexOfMoveMovie - 1, 0, movie);
-      this.setState({ movieList: this.state.movieList })
-    } else if (position === 'down' && indexOfMoveMovie !== this.state.movieList.length - 1) {
-      this.state.movieList.splice(indexOfMoveMovie, 1);
-      this.state.movieList.splice(indexOfMoveMovie + 1, 0, movie);
-      this.setState({ movieList: this.state.movieList })
+      this.state.toWatch.splice(indexOfMoveMovie, 1);
+      this.state.toWatch.splice(indexOfMoveMovie - 1, 0, movie);
+      this.setState({toWatch: this.state.toWatch})
+    } else if (position === 'down' && indexOfMoveMovie !== this.state.toWatch.length - 1) {
+      this.state.toWatch.splice(indexOfMoveMovie, 1);
+      this.state.toWatch.splice(indexOfMoveMovie + 1, 0, movie);
+      this.setState({toWatch: this.state.toWatch })
     }
   }
 
   filter = (genre, whached) => {
     if (!whached) {
       if (this.state.filters.indexOf(genre.genre) === -1) {
-        let filteredMovies = this.state.movieList.filter(movie => movie.watched)
-        filteredMovies.push(...this.state.movieList.filter(movie => !movie.watched && movie.Genre.includes(genre.genre)))
-        this.setState({ movieList: filteredMovies, filters: [...this.state.filters, genre.genre] });
+        const filteredMovies = this.state.toWatch.filter(movie => movie.Genre.includes(genre.genre))
+        this.setState({ toWatch: filteredMovies, filters: [...this.state.filters, genre.genre] });
       }
     }
   }
@@ -94,12 +97,13 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={App}>
             <Header toWatch={this.toWatch} movieList={this.state.movieList} query={this.state.query} />
-            <div className=" pull-right">Reset filters<i className="fa fa-filter pull-right"></i></div>
-            <Movies watched={false} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
-            <Movies watched={true} movieList={this.state.movieList} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
+            <div className=" pull-right">Reset filters<i className="fa fa-filter pull-right" onClick={()=>this.getResults()}></i></div>
+            <div className=" pull-right">{this.state.filters.map(genre=><span key={uuid()}>{genre}</span>)}</div>
+            <Movies watched={false} movieList={this.state.toWatch} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
+            <Movies watched={true} movieList={this.state.watched} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
           </Route>
           <Redirect exact from="/movie-info" to="/" />
-          <Route path="/movie-info/:id" component={MovieInfo} />
+          <Route path="/:id" component={MovieInfo} />
         </Switch>
       </>
     )
