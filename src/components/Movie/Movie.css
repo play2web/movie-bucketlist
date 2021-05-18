@@ -7,7 +7,7 @@ a.text-dark {
 }
 
 h4 {
-    transition: font-size 1s linear;
+    transition: font-size 1s ease;
 }
 
 h4:hover {
