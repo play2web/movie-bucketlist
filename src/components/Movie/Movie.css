@@ -1,0 +1,60 @@
+img.w-100 {
+    display: none;
+}
+
+a.text-dark {
+    text-decoration: none;
+}
+
+h4 {
+    transition: font-size 1s linear;
+}
+
+h4:hover {
+    font-size: 1.6em;
+}
+
+li.list-inline-item, div.pull-right>span {
+    background-color: #6c757d;
+    color:#fff;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+li.list-inline-item:first-child {
+	margin-left: 0;
+}
+
+div.pull-right>span {
+	border-radius: 5px;
+	margin:5px;
+}
+
+.list-inline-item:not(:last-child) {
+    margin-right: 0;
+}
+
+li.list-inline-item:hover {
+    background-color: #5d666d;
+}
+
+i.fa.fa-filter.pull-right {
+    height: 24px;
+    line-height: 24px;
+}
+
+.btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-group:not(:last-child) > .btn {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-radius:5px;
+    margin: 0 5px;
+    margin-left:0;
+}
+
+.btn-group > .btn:nth-child(n+3), .btn-group > :not(.btn-check) + .btn, .btn-group > .btn-group:not(:first-child) > .btn {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 0 5px;
+}
+

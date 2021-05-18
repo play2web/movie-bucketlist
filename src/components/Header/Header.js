@@ -30,7 +30,7 @@ export class Header extends React.Component {
 		}
 	}
 
-	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div>X No matching results!</div>;
+	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div className='no-match'>X No matching results!</div>;
 
 	hideResults = () => document.documentElement.addEventListener('click', () => this.state.queryWord.length && this.setState({ queryWord: '' }))
 
@@ -44,7 +44,7 @@ export class Header extends React.Component {
 								<img className="logo img-fluid" src="https://image.freepik.com/free-vector/click-movie-logo-vector_18099-258.jpg"></img>
 							</a> </div>
 						<div className="col-10">
-							<div className="input-group">
+							<div className="input-group clearfix">
 								<input className="form-control border-right-0" placeholder="Search" value={this.state.queryWord} onChange={this.searching} />
 								<span className="input-group-append bg-white border-right-0">
 									<span className="input-group-text bg-transparent">

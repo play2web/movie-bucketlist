@@ -12,3 +12,48 @@
 .absolute-position li{
     margin-top: 5px;
   }
+
+.col-2 {
+    flex: 0 0 auto;
+    width: 15%;
+}
+
+.col-10 {
+    flex: 0 0 auto;
+    width: 80%;
+}
+
+span.input-group-text.bg-transparent {
+    height: 100%;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-group.clearfix {
+    float: right;
+}
+
+i.fa.fa-plus {
+    float: right;
+    line-height: 24px;
+    margin: 0 20px;
+}
+
+.absolute-position{
+  padding:0;
+}
+
+.absolute-position li {
+  margin:0;
+  padding:3px 10px;
+}
+
+.absolute-position li:hover {
+  background-color:#000;
+}
+
+div.no-match {
+  padding: 10px 15px;
+}
