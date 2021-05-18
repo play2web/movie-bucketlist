@@ -1,8 +1,26 @@
-body {
-	margin:15px;
-	background-color: black;
-}
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
+* {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+body {
+	font-size: 14px;
+  padding: 0;
+  margin: 0px;
+  background-color:#282E45 ;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+a {
+	outline: none;
+	text-decoration: none;
+	color: inherit;
+  }
+  button {
+	outline: none;
+  }
+  
 @media (min-width: 1400px) {
 	.container {
 	    max-width: 900px;

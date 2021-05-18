@@ -29,6 +29,7 @@ a {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 10px;
+    justify-content: space-between;
 }
 .card-body{
     width: 100%;
@@ -91,15 +92,22 @@ h2{
     font-size: 2em;
     margin-bottom: 20px;
     color: #941fe8;
+    text-align: center;
 }
 
-
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 15px;
+    color: whitesmoke;
+}
 .list-group-item{
     font-size: 1.5em;
     margin-bottom: 15px;
     line-height: 1.2em;
     color: #941fe8; 
     background-color: transparent;
+   text-align: left;
 }
 i.fa.fa-arrow-circle-left {
     width: 24px;
@@ -112,3 +120,59 @@ span {
 span.mov-title {
     font-weight: bold;
 }
+@media screen and (max-width: 723px) {
+    .card-header {
+      padding: 30px 30px;
+    }
+    .row{
+        display: inline;
+    }
+    .col-5{
+        width: 100%;
+    }
+    .col-7{
+        width: 100%;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+    }
+    div.card div.card-body {
+      width: 100%;
+      padding: 30px 5px;
+      margin-left: 30px;
+    }
+  
+     h2 {
+        margin:25px;
+        width: 50%;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+  
+    h3 {
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    img {
+      width: 250px;
+  
+      justify-content: center;
+    }
+    .img-fluid {
+        height: auto;
+        width: 310px;
+    }
+    .list-group-item{
+        font-size: 15px;
+        margin-bottom: 15px;
+        line-height: 1.2em;
+        color: #941fe8; 
+        background-color: transparent;
+       text-align: left;
+    }
+  }
+
+  
