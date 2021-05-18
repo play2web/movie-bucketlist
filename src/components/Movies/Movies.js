@@ -12,7 +12,7 @@ export const Movies = (props) => {
 
 	return (
 		<>
-			<div className="page-header">
+			<div className={`page-header ${props.watched?'toWatch':'watched'}`}>
 				<h1>{!props.watched ? 'TO WATCH' : 'WATCHED'}</h1>
 			</div>
 			{showMovies(props.watched)}

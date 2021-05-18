@@ -30,7 +30,8 @@ export const MovieInfo = (props) => {
 		<>
 		<div className="card-header">
 			<Link to={`/`}><i className="fa fa-arrow-circle-left"></i></Link>
-			<span>{movie.watched} / {movie.Title}</span>
+			<span>{!movie.watched ? 'To Watch': 'Watched'} / <span className='mov-title'>{movie.Title}</span></span>
+			{console.log(movie.watched)}
 		</div>
 		<div className="card-body">
 			<div className="row">
