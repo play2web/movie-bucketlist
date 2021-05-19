@@ -22,7 +22,7 @@ export const Movie = (props) => {
 						<div className="col-10">
 							<div className="card-body p-3">
 								<Link to={`/${props.movie.id}`} className="text-dark"><h4>{props.movie.Title}</h4></Link>
-								<p className="text-muted small">{props.movie.Rating}</p>
+								<p className="text-muted small">{props.movie.imdbRating}</p>
 								<ul className="list-inline">
 									{genres.map(genre => <li className="list-inline-item" key={uuid()} onClick={() => props.filterGenre({ genre }, props.watched)}>
 										{genre}
