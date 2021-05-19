@@ -7,7 +7,7 @@ import { Movie } from '../Movie/Movie';
 export const Movies = (props) => {
 
 	const showMovies = (watched) => {
-		return props.movieList.length ? props.movieList.map(movie => <Movie key={uuid()} movie={movie} watched={props.watched} hide={props.hide} remove={props.remove} move={props.move} filter={props.filter} />) : <li>The list is empty</li>
+		return props.movieList.length ? props.movieList.map(movie => <Movie key={uuid()} movie={movie} movieList={props.movieList} watched={props.watched} hide={props.hide} remove={props.remove} move={props.move} filterGenre={props.filterGenre} />) : <li>The list is empty</li>
 	}
 
 	return (

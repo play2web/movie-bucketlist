@@ -22,15 +22,9 @@ export class Header extends React.Component {
 		}
 	}
 
-	displayMovie = (movie) => {
-		if (this.props.movieList.some(movieInList => movieInList.imdbID === movie.imdbID)) {
-			return <li key={uuid()}>{movie.Title}</li>
-		} else {
-			return <li key={uuid()}><span className="mt-5">{movie.Title}</span>  <i className="fa fa-plus" onClick={() => this.setState({ queryWord: '' }, this.props.toWatch(movie))}></i></li>
-		}
-	}
+	displayMovie = (movie) => <li key={uuid()}><span className="mt-5">{movie.Title}</span>  {!this.props.movieList.some(movieInList => movieInList.imdbID === movie.imdbID) && <i className="fa fa-plus" onClick={() => this.setState({ queryWord: '' }, this.props.toWatch(movie))}></i>}</li>
 
-	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie)) : <div className='no-match'>X No matching results!</div>;
+	showMatchingResults = () => this.state.matchMovies.length ? this.state.matchMovies.map(movie => this.displayMovie(movie))  : <div className='no-match'>X No matching results!</div>;
 
 	hideResults = () => document.documentElement.addEventListener('click', () => this.state.queryWord.length && this.setState({ queryWord: '' }))
 
@@ -52,7 +46,7 @@ export class Header extends React.Component {
 									</span>
 								</span>
 								<ul className="absolute-position list-unstyled">
-									{this.state.queryWord.length >= 3 && this.showMatchingResults()}
+									{this.state.queryWord.length>=3 && this.showMatchingResults()}
 									{this.hideResults()}
 								</ul>
 							</div>
