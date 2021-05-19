@@ -1,8 +1,3 @@
-
-.text-muted {
-    color: thistle;
-    
-}
 a.text-dark {
     text-decoration: none;
     color: white;
@@ -11,7 +6,6 @@ a.text-dark {
 h4 {
     transition: font-size 1s ease;
     color: #941fe8;
-    font-size: 1.6em
 }
 
 h4:hover {
@@ -29,6 +23,7 @@ h4:hover {
 }
 .list-inline:hover{
     color: violet;
+    pointer-events: visible;
 }
 li.list-inline-item, div.pull-right>span {
     background-color: #6c757d;

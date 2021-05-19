@@ -78,7 +78,7 @@ class App extends React.Component {
     }
   }
 
-  filter = (genre, whached) => {
+  filterGenre = (genre, whached) => {
     if (!whached) {
       if (this.state.filters.indexOf(genre.genre) === -1) {
         const filteredMovies = this.state.toWatch.filter(movie => movie.Genre.includes(genre.genre))
@@ -97,10 +97,10 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact component={App}>
             <Header toWatch={this.toWatch} movieList={this.state.movieList} query={this.state.query} />
-            <div className=" pull-right">Reset filters<i className="fa fa-filter pull-right" onClick={()=>this.getResults()}></i></div>
+            {this.state.filters.length ? <div className=" pull-right">Reset filters<i className="fa fa-filter pull-right" onClick={()=>this.getResults()}></i></div> : null}
             <div className=" pull-right">{this.state.filters.map(genre=><span key={uuid()}>{genre}</span>)}</div>
-            <Movies watched={false} movieList={this.state.toWatch} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
-            <Movies watched={true} movieList={this.state.watched} hide={this.hide} remove={this.remove} move={this.move} filter={this.filter} filters={this.state.filters} reset={this.getResults} />
+            <Movies watched={false} movieList={this.state.toWatch} hide={this.hide} remove={this.remove} move={this.move} filterGenre={this.filterGenre} filters={this.state.filters} reset={this.getResults} />
+            <Movies watched={true} movieList={this.state.watched} hide={this.hide} remove={this.remove} move={this.move} filterGenre={this.filterGenre} filters={this.state.filters} reset={this.getResults} />
           </Route>
           <Redirect exact from="/movie-info" to="/" />
           <Route path="/:id" component={MovieInfo} />

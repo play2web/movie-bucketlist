@@ -17,22 +17,22 @@ export const Movie = (props) => {
 				<div className=" rounded shadow border-0">
 					<div className="row">
 						<div className="col-2">
-							<img className="w-100"src={props.movie.Poster} />
+							<img className="w-100" src={props.movie.Poster} alt="poster" />
 						</div>
 						<div className="col-10">
 							<div className="card-body p-3">
 								<Link to={`/${props.movie.id}`} className="text-dark"><h4>{props.movie.Title}</h4></Link>
 								<p className="text-muted small">{props.movie.imdbRating}</p>
 								<ul className="list-inline">
-									{genres.map(genre => <li className="list-inline-item" key={uuid()} onClick={() => props.filter({ genre }, props.watched)}>
+									{genres.map(genre => <li className="list-inline-item" key={uuid()} onClick={() => props.filterGenre({ genre }, props.watched)}>
 										{genre}
 									</li>)}
 								</ul>
 								<div className="btn-group" role="group" aria-label="Basic example">
 									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.hide(props.movie.id)}><i className="fa fa-eye"></i></button>}
 									<button type="button" className="btn btn-secondary" onClick={() => props.remove(props.movie.id)}><i className="fa fa-trash"></i></button>
-									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('up', props.movie)}><i className="fa fa-arrow-up"></i></button>}
-									{!props.watched && <button type="button" className="btn btn-secondary" onClick={() => props.move('down', props.movie)}><i className="fa fa-arrow-down"></i></button>}
+									{(!props.watched && props.movieList.indexOf(props.movie)!==0) ? <button type="button" className="btn btn-secondary" onClick={() => props.move('up', props.movie)}><i className="fa fa-arrow-up"></i></button>:null}
+									{(!props.watched && props.movieList.indexOf(props.movie)!==props.movieList.length-1) ? <button type="button" className="btn btn-secondary" onClick={() => props.move('down', props.movie)}><i className="fa fa-arrow-down"></i></button>:null}
 								</div>
 							</div>
 						</div>
