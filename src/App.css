@@ -21,13 +21,6 @@ a {
 	outline: none;
   }
   
-@media (min-width: 1400px) {
-	.container {
-	    max-width: 900px;
-	    width: 100%;
-	    padding: 0 20px;
-	}
-}
 
 li {
     margin: 20px;

@@ -27,6 +27,7 @@ export const MovieInfo = (props) => {
 
 	const displayInfo = () => (
 		<>
+		<div className ="movieInfo">
 		<div className="card-header">
 			<Link to={`/`}><i className="fa fa-arrow-circle-left"></i></Link>
 			<span>{!movie.watched ? 'To Watch': 'Watched'} / <span className='mov-title'>{movie.Title}</span></span>
@@ -62,6 +63,7 @@ export const MovieInfo = (props) => {
 					</ul>
 				</div>
 			</div>
+		</div>
 		</div>
 		</>
 	)
