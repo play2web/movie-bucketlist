@@ -17,12 +17,12 @@ export const Movie = (props) => {
 				<div className=" rounded shadow border-0">
 					<div className="row">
 						<div className="col-2">
-							<img className="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9vmDsj0afzD9kB38ZOGx_bPqhi6t-Jx2q6A&usqp=CAU" alt="" />
+							<img className="w-100"src={props.movie.Poster} />
 						</div>
 						<div className="col-10">
 							<div className="card-body p-3">
 								<Link to={`/${props.movie.id}`} className="text-dark"><h4>{props.movie.Title}</h4></Link>
-								<p className="text-muted small">{props.movie.Rating}</p>
+								<p className="text-muted small">{props.movie.imdbRating}</p>
 								<ul className="list-inline">
 									{genres.map(genre => <li className="list-inline-item" key={uuid()} onClick={() => props.filter({ genre }, props.watched)}>
 										{genre}

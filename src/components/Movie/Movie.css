@@ -1,7 +1,8 @@
-img.w-100 {
-    display: none;
-}
 
+.text-muted {
+    color: thistle;
+    
+}
 a.text-dark {
     text-decoration: none;
     color: white;
@@ -27,7 +28,6 @@ h4:hover {
 }
 .list-inline:hover{
     color: violet;
-    pointer-events: visible;
 }
 li.list-inline-item, div.pull-right>span {
     background-color: #6c757d;
