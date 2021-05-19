@@ -14,7 +14,7 @@ export const Movie = (props) => {
 	return (
 		<div className="row mt-4">
 			<div className="item col-12 mb-3">
-				<div className="card rounded shadow border-0">
+				<div className=" rounded shadow border-0">
 					<div className="row">
 						<div className="col-2">
 							<img className="w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9vmDsj0afzD9kB38ZOGx_bPqhi6t-Jx2q6A&usqp=CAU" alt="" />
