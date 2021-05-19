@@ -14,7 +14,7 @@ export const Movie = (props) => {
 	return (
 		<div className="row mt-4">
 			<div className="item col-12 mb-3">
-				<div className="card rounded shadow border-0">
+				<div className=" rounded shadow border-0">
 					<div className="row">
 						<div className="col-2">
 							<img className="w-100" src={props.movie.Poster} alt="poster" />

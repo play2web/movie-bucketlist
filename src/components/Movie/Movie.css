@@ -1,15 +1,30 @@
 a.text-dark {
     text-decoration: none;
+    color: white;
 }
 
 h4 {
     transition: font-size 1s ease;
+    color: #941fe8;
 }
 
 h4:hover {
     font-size: 1.6em;
+    color: thistle;
 }
-
+.card{
+    height: auto;
+}
+.list-inline{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: space-between;
+}
+.list-inline:hover{
+    color: violet;
+    pointer-events: visible;
+}
 li.list-inline-item, div.pull-right>span {
     background-color: #6c757d;
     color:#fff;
