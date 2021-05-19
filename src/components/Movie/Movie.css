@@ -11,6 +11,7 @@ a.text-dark {
 h4 {
     transition: font-size 1s ease;
     color: #941fe8;
+    font-size: 1.6em
 }
 
 h4:hover {
